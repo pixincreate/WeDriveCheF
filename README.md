@@ -34,7 +34,7 @@ driver.get(URL)
 
 ## Requirements:
 - Operating System: Windows _(Tested only on Windows)_
-- Python Version: `3.5+` (`3.10` preferred)
+- Python Version: `3.5+` (`3.10+` preferred)
 - Packages Required: WinApps, Selenium (Get's installed upon running `requirements.txt`)
 
 ## LICENSE:
