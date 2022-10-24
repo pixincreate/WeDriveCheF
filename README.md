@@ -1,4 +1,5 @@
-# Driver Checker and Fetcher (Suggest a better name, thanks!)
+# Web Driver Checker and Fetcher [WeDriCheF]
+### (Suggest a better name, thanks!)
 
 As the title says, this tiny module's only job is to check for suitable `web_driver` on your PC for ease of use.
 
