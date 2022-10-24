@@ -20,6 +20,7 @@ import os
 import sys
 
 import winapps
+import traceback
 
 from selenium import webdriver
 
@@ -41,62 +42,68 @@ def resource_path(another_way):
 
 # Functionality
 def web_driver(head_mode):
-    # Fetches the application list from your installed apps
-    for item in winapps.list_installed():
-        item = item.name
-        if 'Brave Nightly' in item:
-            flag = 'Brave-Browser-Nightly'
-        elif 'Brave' in item:
-            flag = 'Brave-Browser'
-        if 'Chrome' in item:
-            flag = 'Chrome'
-        elif 'Firefox' in item:
-            flag = 'Firefox'
-
-    options = Options()
-    # Checks for Chromium based browser i.e., Brave
-    if 'Brave-Browser' == flag or 'Brave-Browser-Nightly' == flag:
-        options.binary_location = f"C:\\Program Files\\BraveSoftware\\{flag}\\Application\\brave.exe"
-        is_chromium = True
-
-    # Checks for the existence of Firefox
-    elif 'Firefox' == flag:
-        options = FirefoxOptions()
-
-    # Checks whether the browser selected is Google Chrome which I do not recommend using it whatsoever
-    elif 'Chrome' == flag:
-        print("Google Chrome is NOT RECOMMENDED due to it's stance on user privacy.\n"
-              "PiX recommends you using Firefox or Brave instead.\n"
-              "Also, as per the reports, Chrome is the most insecure browser to be existent!")
-        is_chromium = True
-
-    # Edge is unsupported as I want to take revenge against Microsoft, LOL
-    elif 'Edge' == flag:
-        print("Edge is unsupported because PiX don't use it!")
-
-    # Rare condition!
-    else:
-        print("No browser is supported on your PC."
-              "Kindly install 'Brave' or 'Firefox' to get this module working!")
-
-    if head_mode == 'headless':
-        options.add_argument(f"--{head_mode}")
-
-    # If the webdriver is up to-date
     try:
-        # and it is chromium (blink) based browser
-        if is_chromium:
-            options.add_argument("--incognito")
-            driver = webdriver.Chrome(service=Service(executable_path=resource_path('web_drivers\\chromedriver.exe')),
-                                      options=options)
-        # if the browser is based on Firefox
+        # Fetches the application list from your installed apps
+        for item in winapps.list_installed():
+            item = item.name
+            if 'Brave Nightly' in item:
+                flag = 'Brave-Browser-Nightly'
+            elif 'Brave' in item:
+                flag = 'Brave-Browser'
+            if 'Chrome' in item:
+                flag = 'Chrome'
+            elif 'Firefox' in item:
+                flag = 'Firefox'
+
+        options = Options()
+        # Checks for Chromium based browser i.e., Brave
+        if 'Brave-Browser' == flag or 'Brave-Browser-Nightly' == flag:
+            options.binary_location = f"C:\\Program Files\\BraveSoftware\\{flag}\\Application\\brave.exe"
+            is_chromium = True
+
+        # Checks for the existence of Firefox
+        elif 'Firefox' == flag:
+            options = FirefoxOptions()
+
+        # Checks whether the browser selected is Google Chrome which I do not recommend using it whatsoever
+        elif 'Chrome' == flag:
+            print("Google Chrome is NOT RECOMMENDED due to it's stance on user privacy.\n"
+                  "PiX recommends you using Firefox or Brave instead.\n"
+                  "Also, as per the reports, Chrome is the most insecure browser to be existent!")
+            is_chromium = True
+
+        # Edge is unsupported as I want to take revenge against Microsoft, LOL
+        elif 'Edge' == flag:
+            print("Edge is unsupported because PiX don't use it!")
+
+        # Rare condition!
         else:
-            options.add_argument("--private")
-            driver = webdriver.Firefox(service=FirefoxService(
-                executable_path=resource_path('web_drivers\\geckodriver.exe')),
-                options=options)
-    # If the Webdriver is outdated or it doesn't exist!
-    except FileNotFoundError:
-        print("Webdriver seems to be outdated, try updating the webdriver..", end='\n')
+            print("No browser is supported on your PC."
+                  "Kindly install 'Brave' or 'Firefox' to get this module working!")
+
+        if head_mode == 'headless':
+            options.add_argument(f"--{head_mode}")
+
+        # If the webdriver is up to-date
+        try:
+            # and it is chromium (blink) based browser
+            if is_chromium:
+                options.add_argument("--incognito")
+                driver = webdriver.Chrome(service=Service(executable_path=resource_path('web_drivers\\chromedriver.exe')),
+                                          options=options)
+            # if the browser is based on Firefox
+            else:
+                options.add_argument("--private")
+                driver = webdriver.Firefox(service=FirefoxService(
+                    executable_path=resource_path('web_drivers\\geckodriver.exe')),
+                    options=options)
+        # If the Webdriver is outdated or it doesn't exist!
+        except FileNotFoundError:
+            print("Webdriver seems to be outdated, try updating the webdriver..", end='\n')
+
+    except Exception as e:
+        driver.quit()
+        print(e)
+        traceback.print_exc()
 
     return driver
