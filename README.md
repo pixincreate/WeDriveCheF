@@ -1,20 +1,41 @@
 # Driver Checker and Fetcher (Suggest a better name, thanks!)
 
-As the title says, this tiny module's only job is to check for suitable `web_driver` on your PC for ease of use.  
-
-Based on CC0 1.0 Universal License.  
+As the title says, this tiny module's only job is to check for suitable `web_driver` on your PC for ease of use.
 
 ## Usage:
-```commandline
+- Before using make sure you run the `requirements.txt` by using the command:  
+`pip install -r requirements.txt`
+```python
 # Enter your URL here or directly inside the `get` function
 URL = "https://pixincreate.github.io"
 
 # Call the webdriver on your code by typing the below command
 # This assigns the suitable driver found on your PC
 
-# head_mode may be `head` or `headless`
+# Put head_mode as `headless` if you want it to be headless,
+# Else, give it any random value within quotes.
 driver = web_driver(head_mode)
 
-# Web driver opens up the link with desired head_mode. 
+# Web driver opens up the link with desired head_mode in incognito / private mode. 
 driver.get(URL)
 ```
+## Working:
+- When you call the function `web_driver` and assign it to a `driver`, it initially goes through all your installed applications
+  - No need to worry, none of your data is transmitted
+- It checks for these below given browsers:
+  - Brave 
+  - Brave Nightly
+  - Firefox
+  - Google Chrome (I don't recommend using it as it is found to be insecure based on numerous reports and it is a threat to user-privacy)
+-  If the browser is Brave, it assigns its binary file, if chrome or firefox, raises a flag as they're natively supported by `selenium`
+- Depending on the browser type, the `driver` is assigned with `incognito/private` as the argument
+- This `driver` is then returned to the `calling function / method` which later calls for the URL.
+
+## Requirements:
+- Operating System: Windows _(Tested only on Windows)_
+- Python Version: `3.5+` (`3.10` preferred)
+- Packages Required: WinApps, Selenium (Get's installed upon running `requirements.txt`)
+
+## LICENSE:
+This repo come under _CC0 1.0 Universal_ copyrighted to `pixincreate`. Click [_here_]() to learn more about the permissions offered by this license!
+
