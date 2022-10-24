@@ -34,6 +34,7 @@ driver.quit()
   - Google Chrome (I don't recommend using it as it is found to be insecure based on numerous reports and it is a threat to user-privacy)
 -  If the browser is Brave, it assigns its binary file, if chrome or firefox, raises a flag as they're natively supported by `selenium`
 - Depending on the browser type, the `driver` is assigned with `incognito/private` as the argument
+  - In case, the driver doesn't exist or outdated, it automatically opens up the default web browsers to download the latest `web_driver.exe` file (you've to download this manually!)
 - This `driver` is then returned to the `calling function / method` which later calls for the URL.
 
 ## Requirements:
