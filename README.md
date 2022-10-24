@@ -19,6 +19,10 @@ driver = web_driver(head_mode)
 
 # Web driver opens up the link with desired head_mode in incognito / private mode. 
 driver.get(URL)
+
+# Make sure you use the below command once you're done with your work, else
+# it'll remain active in the background drain battery and memory
+driver.quit()
 ```
 ## Working:
 - When you call the function `web_driver` and assign it to a `driver`, it initially goes through all your installed applications
