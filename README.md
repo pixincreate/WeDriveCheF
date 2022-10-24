@@ -43,5 +43,5 @@ driver.quit()
 - Packages Required: WinApps, Selenium (Get's installed upon running `requirements.txt`)
 
 ## LICENSE:
-This repo come under _CC0 1.0 Universal_ copyrighted to `pixincreate`. Click [_here_]() to learn more about the permissions offered by this license!
+This repo come under _CC0 1.0 Universal_ copyrighted to `pixincreate`. Click [_here_](https://github.com/pixincreate/WeDriveCheF/blob/main/LICENSE.md) to learn more about the permissions offered by this license!
 
