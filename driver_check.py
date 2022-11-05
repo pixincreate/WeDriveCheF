@@ -126,8 +126,3 @@ def web_driver(head_mode):
         return driver
     except UnboundLocalError:
         quit()
-
-
-web = web_driver('lol')
-web.get('https://pixincreate.github.io')
-web.quit()
